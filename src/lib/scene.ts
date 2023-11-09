@@ -2,12 +2,12 @@ import * as CANNON from 'https://cdn.skypack.dev/cannon-es';
 import * as THREE from 'three';
 import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';
 
-const FRONT_GIFT = "FRONT_GIFT";
-const BACK_GIFT = "BACK_GIFT";
-const TOP_GIFT = "TOP_GIFT";
-const BOTTOM_GIFT = "BOTTOM_GIFT";
-const RIGHT_GIFT = "RIGHT_GIFT";
-const LEFT_GIFT = "LEFT_GIFT";
+const FRONT_GIFT = "FRONT";
+const BACK_GIFT = "BACK";
+const TOP_GIFT = "TOP";
+const BOTTOM_GIFT = "BOTTOM";
+const RIGHT_GIFT = "RIGHT";
+const LEFT_GIFT = "LEFT";
 const YOU_WIN = "YOU WIN!!!";
 const YOU_LOSE = "YOU LOSE";
 
@@ -65,24 +65,36 @@ const canvas4 = document.createElement('canvas'), ctx4 = canvas4.getContext('2d'
 const canvas5 = document.createElement('canvas'), ctx5 = canvas5.getContext('2d');  //  front
 const canvas6 = document.createElement('canvas'), ctx6 = canvas6.getContext('2d');  //  back
 
-const changeCanvas = (ctx: { font: string; fillStyle: string; fillRect: (arg0: number, arg1: number, arg2: number, arg3: number) => void; textAlign: string; textBaseline: string; fillText: (arg0: any, arg1: number, arg2: number) => void; }, gift: any) => {
+window.devicePixelRatio=2;      //Clear Text 
+
+const changeCanvas = (canvas, ctx, gift) => {
+    // canvas.width = Math.floor(2 * canvas.width);
+    // canvas.height = Math.floor(2 * canvas.height);
+    window.devicePixelRatio = 10;
+    var size = 150;
+    canvas.style.width = size + "px"; 
+    canvas.style.height = size + "px";
+    var scale = window.devicePixelRatio;
+    canvas.width = Math.floor(size * scale); 
+    canvas.height = Math.floor(size * scale); 
     if(ctx) {
-        ctx.font = '20pt Arial';
+        ctx.font = '150pt Arial';
         ctx.fillStyle = 'white';
-        ctx.fillRect(0, 0, canvas1.width, canvas1.height);
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = 'black';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText(gift, canvas1.width / 2, canvas1.height / 2);
+        ctx.fillText(gift, canvas.width / 2, canvas.height / 2);
+        ctx.scale(scale, scale);
     }
 };
 
-changeCanvas(ctx1, params.rightGift);
-changeCanvas(ctx2, params.leftGift);
-changeCanvas(ctx3, params.topGift);
-changeCanvas(ctx4, params.bottomGift);
-changeCanvas(ctx5, params.frontGift);
-changeCanvas(ctx6, params.backGift);
+changeCanvas(canvas1, ctx1, params.rightGift);
+changeCanvas(canvas2, ctx2, params.leftGift);
+changeCanvas(canvas3, ctx3, params.topGift);
+changeCanvas(canvas4, ctx4, params.bottomGift);
+changeCanvas(canvas5, ctx5, params.frontGift);
+changeCanvas(canvas6, ctx6, params.backGift);
 
 const texture1 = new THREE.Texture(canvas1);
 const texture2 = new THREE.Texture(canvas2);
@@ -148,12 +160,12 @@ const initScene = (canvasEL:HTMLCanvasElement) => {
     params.xyz = getRandomInt(0, 59) % 6;
     intervalID = setInterval(determinXYZ, 1000);
 
-    changeCanvas(ctx1, params.rightGift);
-    changeCanvas(ctx2, params.leftGift);
-    changeCanvas(ctx3, params.topGift);
-    changeCanvas(ctx4, params.bottomGift);
-    changeCanvas(ctx5, params.frontGift);
-    changeCanvas(ctx6, params.backGift);
+    changeCanvas(canvas1, ctx1, params.rightGift);
+    changeCanvas(canvas2, ctx2, params.leftGift);
+    changeCanvas(canvas3, ctx3, params.topGift);
+    changeCanvas(canvas4, ctx4, params.bottomGift);
+    changeCanvas(canvas5, ctx5, params.frontGift);
+    changeCanvas(canvas6, ctx6, params.backGift);
     texture1.needsUpdate = true;
     texture2.needsUpdate = true;
     texture3.needsUpdate = true;
@@ -173,7 +185,7 @@ const determinXYZ = () => {
 const initPhysics = () => {
     physicsWorld = new CANNON.World({
         allowSleep: true,
-        gravity: new CANNON.Vec3(0, -20, 0),
+        gravity: new CANNON.Vec3(0, -50, 0),
     })
     physicsWorld.defaultContactMaterial.restitution = .3;
 }
@@ -257,7 +269,7 @@ const createFloor = () => {
         }),
     )
     floor.receiveShadow = true;
-    floor.position.y = -2;
+    floor.position.y = -1.5;
     floor.quaternion.setFromAxisAngle(new THREE.Vector3(-1, 0, 0), Math.PI * .5);
     scene.add(floor);
 
@@ -364,7 +376,7 @@ const animate = () => {
         let elaptime = curtime - params.startTime;
         physicsWorld.step(1 / 60);
         if(elaptime < params.spinTime) {    
-            myDice.body.velocity.set(0, 0.3, 0);
+            myDice.body.velocity.set(0, 0.8, 0);
     
             if(params.xyz == 0) {
                 myDice.body.angularVelocity.set(Math.PI * 3, 0, 0);

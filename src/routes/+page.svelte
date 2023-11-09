@@ -83,19 +83,19 @@
 		<div class="bg-grey-300">
 			<label class="block text-gray-600 font-semibold mb-2">Left Face:</label>
 			<input
-				id="right_gift_input"
+				id="left_gift_input"
 				type="text"
 				class="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-				placeholder="Right"
+				placeholder="Left"
 			/>
 		</div>
 		<div class="bg-grey-300">
 			<label class="block text-gray-600 font-semibold mb-2">Right Face:</label>
 			<input
-				id="left_gift_input"
+				id="right_gift_input"
 				type="text"
 				class="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-				placeholder="Left"
+				placeholder="Right"
 			/>
 		</div>
 	</div>
