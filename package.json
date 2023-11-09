@@ -1,0 +1,53 @@
+{
+	"name": "threejs-sveltekit",
+	"version": "1.0.0",
+	"description": "Three.js example app built with Svelte",
+	"author": "Jason Sturges <jason@jsonsturges.com> (https://jasonsturges.com)",
+	"homepage": "https://jasonsturges.github.io//threejs-sveltekit/",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jasonsturges/threejs-sveltekit"
+	},
+	"license": "ISC",
+	"keywords": [
+		"3d",
+		"three",
+		"svelte",
+		"sveltekit",
+		"graphics"
+	],
+	"type": "module",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "prettier --check . && eslint .",
+		"format": "prettier --write ."
+	},
+	"dependencies": {
+		"three": "^0.155.0"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/kit": "next",
+		"@types/three": "^0.155.0",
+		"@typescript-eslint/eslint-plugin": "^5.27.0",
+		"@typescript-eslint/parser": "^5.27.0",
+		"autoprefixer": "^10.4.16",
+		"eslint": "^8.16.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-svelte3": "^4.0.0",
+		"postcss": "^8.4.31",
+		"prettier": "^2.6.2",
+		"prettier-plugin-svelte": "^2.7.0",
+		"svelte": "^3.44.0",
+		"svelte-check": "^2.7.1",
+		"svelte-preprocess": "^4.10.6",
+		"tailwindcss": "^3.3.5",
+		"tslib": "^2.3.1",
+		"typescript": "^4.7.4",
+		"vite": "^3.1.0-beta.1"
+	}
+}
